@@ -1,7 +1,6 @@
 package cron
 
 import (
-	"context"
 	"time"
 )
 
@@ -11,7 +10,7 @@ type Worker struct {
 	stop chan bool
 }
 
-func runPeriodically(_ context.Context, task func(), interval time.Duration) *Worker {
+func runPeriodically(task func(), interval time.Duration) *Worker {
 	stop := make(chan bool)
 	w := &Worker{ticker: time.NewTicker(interval), stop: stop}
 	go func() {

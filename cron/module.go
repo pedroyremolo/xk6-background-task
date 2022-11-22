@@ -1,9 +1,6 @@
 package cron
 
-import (
-	"context"
-	"time"
-)
+import "time"
 
 type Module struct{}
 
@@ -11,6 +8,7 @@ func New() *Module {
 	return &Module{}
 }
 
-func (m Module) RunPeriodically(ctx context.Context, task func(), interval time.Duration) *Worker {
-	return runPeriodically(ctx, task, interval)
+// RunPeriodically receives a task, as function, which runs on a interval passed in milliseconds
+func (m Module) RunPeriodically(task func(), interval int) *Worker {
+	return runPeriodically(task, time.Duration(interval)*time.Millisecond)
 }
